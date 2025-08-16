@@ -1,0 +1,813 @@
+/* =========================================
+   RESET & BASE
+========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  background: #fff;
+  color: #111;
+  overflow-x: hidden;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+ul {
+  list-style: none;
+}
+
+/* =========================================
+   BANNER
+========================================= */
+.top-banner {
+  width: 100%;
+  background: #f7f7f7;
+  color: #111;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.top-banner .banner-text {
+  text-align: center;
+  flex: 1;
+}
+.top-banner .banner-links {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  font-weight: 400;
+}
+.top-banner .banner-links a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================
+   NAVBAR
+========================================= */
+#navbar {
+  width: 100%;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo img {
+  height: 48px;
+}
+.nav-links ul {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+.nav-links li {
+  position: relative;
+}
+.nav-links li > a {
+  font-size: 16px;
+  font-weight: 500;
+  color: #111;
+  position: relative;
+  padding: 4px 0;
+}
+
+/* Animated underline on hover */
+.nav-links li > a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: #111;
+  transition: width 0.3s ease;
+}
+.nav-links li > a:hover::after {
+  width: 100%;
+}
+
+/* Ensure parent li doesn't clip the full-width dropdown */
+.nav-links li.dropdown {
+  position: static; /* remove relative positioning */
+}
+
+/* Dropdown Menu full width under navbar */
+.dropdown-menu {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+
+  position: absolute;
+  top: 100%;       /* below navbar */
+  left: 0;
+
+  width: 100vw;    /* full viewport width */
+  padding: 24px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  z-index: 999;
+
+  display: flex;   /* left-to-right layout */
+  gap: 32px;
+}
+
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Links inside dropdown */
+.dropdown-menu a {
+  display: block;
+  padding: 6px 0;
+  color: #111;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.dropdown-menu a:hover {
+  color: #444;
+}
+
+/* Right Side Actions */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.icon-btn img {
+  height: 22px;
+  width: 22px;
+}
+
+/* Search */
+.search-bar {
+  position: relative;
+}
+.search-bar input {
+  padding: 6px 30px 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  width: 140px;
+}
+.search-bar input:focus {
+  width: 240px;
+  outline: none;
+  border-color: #111;
+}
+.search-bar .search-icon {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.search-bar .search-icon img {
+  height: 18px;
+}
+
+
+/* =========================================
+   CAROUSEL
+========================================= */
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Carousel Inner */
+.carousel-inner {
+  display: flex;
+  transition: transform 0.5s ease;
+  height: 100%;
+}
+
+/* Each slide */
+.carousel-item {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.carousel-item img,
+.carousel-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Shadow gradient at bottom for text readability */
+.carousel-item::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 35%; /* adjust for desired shadow height */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Carousel Text Overlay */
+.carousel-caption {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #fff;
+  z-index: 10;
+}
+
+.carousel-caption small {
+  display: block;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.carousel-caption h2 {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.carousel-caption .btn {
+  background: #fff;
+  color: #111;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.carousel-caption .btn:hover {
+  background: #111;
+  color: #fff;
+}
+
+/* Carousel Controls */
+.carousel-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 12px;
+  z-index: 15;
+}
+
+.carousel-btn {
+  all: unset;
+  cursor: pointer;
+}
+
+.carousel-btn img {
+  height: 28px;
+  width: 28px;
+  display: block;
+}
+
+/* =========================================
+   CAROUSEL
+========================================= */
+
+/* Carousel Dots */
+.carousel-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 15;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  background: #888; /* inactive dots gray */
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.dot.active {
+  background: #fff; /* active dot white */
+}
+
+/* Carousel Text Overlay (moved higher) */
+.carousel-caption {
+  position: absolute;
+  bottom: 80px; /* raised from 40px to 80px */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #fff;
+  z-index: 10;
+}
+
+.carousel-caption small {
+  display: block;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.carousel-caption h2 {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.carousel-caption .btn {
+  background: #fff;
+  color: #111;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.carousel-caption .btn:hover {
+  background: #111;
+  color: #fff;
+}
+
+
+/* =========================================
+   TWO-IMAGE SPLIT SECTION
+========================================= */
+.split-images {
+  display: flex;
+  width: 100%;
+  height: 100vh; /* full viewport height */
+}
+
+.split-item {
+  flex: 1; /* two equal halves */
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end; /* align content to bottom */
+  justify-content: flex-start; /* align content to left */
+  padding: 40px; /* space from bottom/left edges */
+}
+
+.split-content {
+  color: #fff;
+  text-align: left; /* align text left */
+  background: none; /* remove black rectangle */
+  padding: 0; /* remove padding from previous overlay */
+}
+
+.split-content small {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.split-content h2 {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.split-content .btn {
+  background: #fff;
+  color: #111;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.split-content .btn:hover {
+  background: #111;
+  color: #fff;
+}
+
+.split-item::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%; /* adjust for how much shadow you want */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+  pointer-events: none; /* allows clicks on buttons */
+  z-index: 1;
+}
+
+.split-content {
+  position: relative;
+  z-index: 2; /* make sure content is above shadow */
+}
+
+
+/* =========================================
+   THREE PORTRAIT IMAGES
+========================================= */
+.portrait-grid {
+  display: flex;
+  gap: 16px;
+  padding: 40px 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.portrait {
+  flex: 1 1 300px; /* responsive width */
+  max-width: 30%;
+  aspect-ratio: 2/3; /* portrait ratio */
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+}
+
+
+.portrait::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+  z-index: 1;
+}
+
+.portrait .btn {
+  position: relative;
+  z-index: 2; /* above gradient */
+  background: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 18px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-bottom: 16px; /* moves button upward inside the portrait */
+  margin-left: 16px;   /* moves button inward from left */
+}
+
+.portrait .btn:hover {
+  background: #111;
+  color: #fff;
+}
+
+
+
+/* =========================================
+   PRODUCT SCROLLER
+========================================= */
+.product-slider {
+  padding: 40px 20px;
+  background: #f9f9f9;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-header h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111;
+}
+
+/* Slider controls */
+.slider-controls button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;      /* bigger clickable area */
+  transition: transform 0.2s ease;
+  width: 50px;        /* larger button */
+  height: 50px;
+}
+
+.slider-controls button img {
+  width: 100%;
+  height: 100%;
+}
+
+.slider-controls button:hover {
+  transform: scale(1.2);
+}
+
+/* Wrapper for card + title */
+.product-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* left-align title */
+  width: 220px; /* same as card width */
+}
+
+/* Title under the card */
+.product-card-title {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  text-align: left;
+}
+
+
+
+.scroll-wrapper {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
+}
+
+.product-card {
+  position: relative;
+  flex: 0 0 auto;
+  width: 220px;
+  aspect-ratio: 3/4;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.product-card img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  transition: opacity 0.5s ease;
+}
+
+.product-card img.hover-img {
+  opacity: 0; /* back image hidden by default */
+}
+
+.product-card:hover img.hover-img {
+  opacity: 1; /* show back image on hover */
+}
+
+.product-card:hover img.base-img {
+  opacity: 0; /* hide front image on hover */
+}
+
+
+
+/* =========================================
+   FOOTER
+========================================= */
+footer {
+  background: #111;
+  color: #fff;
+  padding: 40px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  text-align: center; /* center all text by default */
+}
+
+/* Footer logo at the top */
+.footer-logo img {
+  height: 50px; /* adjust size as needed */
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto; /* center horizontally */
+}
+
+
+/* Top links (Language / Help / Join Us / Sign In) */
+.footer-links {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-content: center; /* center the links horizontally */
+}
+
+.footer-links a {
+  font-size: 14px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+/* Footer navigation columns */
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* keep nav links left-aligned */
+}
+
+.footer-col h4 {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.footer-col a {
+  display: block;
+  font-size: 13px;
+  color: #ccc;
+  margin-bottom: 6px;
+  text-decoration: none;
+}
+
+.footer-col a:hover {
+  color: #fff;
+}
+
+/* Bottom footer */
+.footer-bottom {
+  width: 100%;
+  border-top: 1px solid #444;
+  padding-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* keep copyright and byAutry spaced */
+  align-items: center;
+  font-size: 13px;
+  color: #ccc;
+  position: relative; /* allow absolute positioning of socials */
+  gap: 10px;
+}
+
+.footer-bottom p, .footer-bottom .credit a {
+  margin: 0;
+}
+
+/* Social links centered in footer */
+.footer-bottom .socials {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 15px;
+}
+
+.footer-bottom .socials a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-bottom .socials a:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================
+   LOADING SCREEN
+========================================= */
+/* Fullscreen loading overlay */
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 1s ease;
+}
+
+/* Logo styling */
+#loading-logo {
+  width: 600px;
+  height: auto;
+  margin-bottom: 40px;
+}
+
+/* START button styling (black & white) */
+#start-btn {
+  display: none;
+  padding: 16px 40px;
+  font-size: 22px;
+  font-weight: 500;
+  color: #000;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-top: 30px;
+  opacity: 0;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+}
+
+#start-btn:hover {
+  background: #000;
+  color: #fff;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.25);
+}
+
+#start-btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Progress container */
+#progress-container {
+  position: absolute;
+  bottom: 40px;
+  width: 80%;
+  max-width: 600px;
+  height: 20px;
+  background: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Progress bar itself */
+#progress-bar {
+  height: 100%;
+  width: 0;
+  background: #000;
+  transition: width 0.1s linear;
+}
+
+/* Percentage text */
+#progress-percent {
+  position: absolute;
+  right: 10px;
+  bottom: 25px;
+  font-weight: bold;
+  font-size: 16px;
+  color: #000;
+}
+
