@@ -1,0 +1,119 @@
+.divider-banner {
+  width: 100%;
+  height: 300px; /* adjust height */
+  background-image: url("../img/merch.webp"); /* your merch image */
+  background-size: cover;     /* make it fill width */
+  background-position: center; /* keep it centered */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.divider-banner::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* dark overlay */
+}
+
+.divider-title {
+  position: relative; /* so it sits above overlay */
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  z-index: 1;
+}
+
+/* Divider without background */
+/* Divider without background image */
+.divider-no-bg {
+  width: 100%;
+  padding: 80px 20px;
+  background: linear-gradient(to right, #000, #111); /* black gradient */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.divider-no-bg .divider-title {
+  font-size: 3rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #fff; /* main text white */
+}
+
+.divider-no-bg .divider-title span {
+  color: #e60000; /* red accent */
+}
+
+
+/* Merch Grid Container */
+.merch-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 across */
+  grid-template-rows: repeat(2, 350px); /* 2 rows, taller boxes */
+  gap: 15px; /* tighter gap */
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Merch Card */
+.merch-card {
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  border-radius: 0; /* no rounded edges */
+}
+
+.merch-card:hover {
+  transform: scale(1.02);
+}
+
+/* Subtle overlay for text readability */
+.merch-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0));
+  pointer-events: none;
+  z-index: 1; /* below text */
+}
+
+/* Title Text */
+.merch-title {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  background: rgba(0,0,0,0.65); 
+  color: #fff;
+  padding: 8px 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.3px;
+  z-index: 2;
+}
+
+/* Responsive Layout */
+@media (max-width: 1024px) {
+  .merch-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .merch-grid {
+    grid-template-columns: 1fr;
+  }
+}

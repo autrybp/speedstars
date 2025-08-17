@@ -6,9 +6,13 @@ document.addEventListener("DOMContentLoaded", function() {
   const progressPercent = document.getElementById("progress-percent");
   const loadingScreen = document.getElementById("loading-screen");
 
-  const images = document.images; // all images on the page
+  const images = document.images;
   const totalImages = images.length;
   let loadedImages = 0;
+
+  // Force a minimum display time (in ms)
+  const minDisplayTime = 1000; 
+  const startTime = Date.now();
 
   function updateProgress() {
     loadedImages++;
@@ -17,24 +21,26 @@ document.addEventListener("DOMContentLoaded", function() {
     progressPercent.textContent = progress + "%";
 
     if (loadedImages >= totalImages) {
-      // All images are done loading
+      const elapsed = Date.now() - startTime;
+      const remainingTime = Math.max(0, minDisplayTime - elapsed);
+
       setTimeout(() => {
         loadingScreen.style.opacity = 0;
         setTimeout(() => loadingScreen.style.display = "none", 1000);
-      }, 500); // short delay before fade-out
+      }, remainingTime); // wait extra if needed
     }
   }
 
   if (totalImages === 0) {
-    // No images? Remove loader immediately
-    updateProgress();
+    // No images? Still respect the minimum time
+    setTimeout(() => updateProgress(), minDisplayTime);
   } else {
     for (let i = 0; i < totalImages; i++) {
       if (images[i].complete) {
         updateProgress();
       } else {
         images[i].addEventListener("load", updateProgress);
-        images[i].addEventListener("error", updateProgress); // in case of broken image
+        images[i].addEventListener("error", updateProgress);
       }
     }
   }

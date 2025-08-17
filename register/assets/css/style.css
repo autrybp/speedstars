@@ -1,0 +1,104 @@
+.divider-banner {
+  width: 100%;
+  height: 300px; /* adjust height */
+  background-image: url("../img/sign-in.webp"); /* your merch image */
+  background-size: cover;     /* make it fill width */
+  background-position: center; /* keep it centered */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.divider-banner::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* dark overlay */
+}
+
+.divider-title {
+  position: relative; /* so it sits above overlay */
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  z-index: 1;
+}
+
+
+/* Sign In Style */
+.email-join-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  background: #f9f9f9;
+  padding: 40px 20px;
+}
+
+.email-container {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+.email-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.email-subtitle {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 25px;
+}
+
+.email-form .input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.email-form input[type="email"] {
+  flex: 1;
+  padding: 14px 20px;
+  border: 1px solid #ccc;
+  border-radius: 50px; /* pill shape */
+  font-size: 1rem;
+}
+
+.email-form button {
+  padding: 14px 25px;
+  background: #000;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px; /* pill shape */
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.email-form button:hover {
+  background: #333;
+}
+
+.disclaimer {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+.disclaimer a {
+  color: #888;
+  text-decoration: underline;
+}
