@@ -4,34 +4,40 @@
 document.addEventListener("DOMContentLoaded", function() {
   const progressBar = document.getElementById("progress-bar");
   const progressPercent = document.getElementById("progress-percent");
-  const startBtn = document.getElementById("start-btn");
   const loadingScreen = document.getElementById("loading-screen");
 
-  let progress = 0;
-  const loadTime = 4000; // total time in ms
-  const intervalTime = 20; // update every 20ms
-  const increment = 100 / (loadTime / intervalTime);
+  const images = document.images; // all images on the page
+  const totalImages = images.length;
+  let loadedImages = 0;
 
-  const interval = setInterval(() => {
-    progress += increment;
-    if (progress >= 100) progress = 100;
-
+  function updateProgress() {
+    loadedImages++;
+    let progress = Math.round((loadedImages / totalImages) * 100);
     progressBar.style.width = progress + "%";
-    progressPercent.textContent = Math.round(progress) + "%";
+    progressPercent.textContent = progress + "%";
 
-    if (progress >= 100) {
-      clearInterval(interval);
-      startBtn.style.display = "block";
-      setTimeout(() => startBtn.style.opacity = 1, 50); // fade in
+    if (loadedImages >= totalImages) {
+      // All images are done loading
+      setTimeout(() => {
+        loadingScreen.style.opacity = 0;
+        setTimeout(() => loadingScreen.style.display = "none", 1000);
+      }, 500); // short delay before fade-out
     }
-  }, intervalTime);
+  }
 
-  startBtn.addEventListener("click", () => {
-    loadingScreen.style.opacity = 0;
-    setTimeout(() => {
-      loadingScreen.style.display = "none";
-    }, 1000); // match CSS fade duration
-  });
+  if (totalImages === 0) {
+    // No images? Remove loader immediately
+    updateProgress();
+  } else {
+    for (let i = 0; i < totalImages; i++) {
+      if (images[i].complete) {
+        updateProgress();
+      } else {
+        images[i].addEventListener("load", updateProgress);
+        images[i].addEventListener("error", updateProgress); // in case of broken image
+      }
+    }
+  }
 });
 
 // ==========================
