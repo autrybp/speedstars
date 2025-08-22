@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const totalImages = images.length;
   let loadedImages = 0;
 
-  // Force a minimum display time (in ms)
+  // Forced a minimum display time here
   const minDisplayTime = 1000; 
   const startTime = Date.now();
 
@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   if (totalImages === 0) {
-    // No images? Still respect the minimum time
     setTimeout(() => updateProgress(), minDisplayTime);
   } else {
     for (let i = 0; i < totalImages; i++) {
